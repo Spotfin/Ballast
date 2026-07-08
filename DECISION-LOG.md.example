@@ -1,0 +1,62 @@
+# DECISION-LOG.md (worked example)
+
+A decision log exists because decisions made in conversation with an AI evaporate. The context window closes, and next week the same question comes back, gets re-argued from scratch, and sometimes gets answered differently. The log makes decisions durable, and more importantly, makes them *reversible on purpose* instead of reversible by accident.
+
+Each entry has five fields:
+
+- **Decision**: one sentence, stated as a commitment, not a preference.
+- **Context**: what forced the decision. Enough that a cold reader understands why it came up.
+- **Rationale**: why this option won, including what it beat. Name the rejected alternatives.
+- **Reversal triggers**: the conditions under which this decision should be reopened. This is the field that makes the log more than a diary. Without triggers, old decisions either become scripture or get silently ignored. With triggers, revisiting is a defined event, not a mood.
+- **Status**: `Active`, `Superseded (by D-xxx)`, or `Retired`.
+
+Rules of use:
+
+- Number entries (D-001, D-002, ...) so PRs, issues, and the build log can cite them.
+- Never edit a superseded entry's content. Add a new entry and update the old one's Status line. The history is the value.
+- The AI collaborator reads Active entries before proposing architectural changes. That instruction belongs in your CLAUDE.md.
+- Small enough to skip the log? Then it is a build-log Deviation, not a decision. The log is for choices someone might reasonably re-argue.
+
+The entries below are worked examples from the fictional rulebook-navigator product used throughout this repo.
+
+---
+
+## D-003: Knowledge base lives in versioned flat files, not a database
+
+**Decision:** The knowledge base is stored as structured flat files in the repo (one entry per file), not in a hosted database.
+
+**Context:** The knowledge base is the product's core IP and its most-reviewed artifact. Early prototyping used a hosted document store, and reviewing changes to entries meant screenshots and trust.
+
+**Rationale:** Flat files get diffs, blame, PR review, and CI checks for free, and every guardrail in this methodology is built on those primitives. The database option won on query performance and lost on reviewability, and at the current scale (low thousands of entries) performance is not the binding constraint. The "hybrid: files as source of truth, database as build artifact" option was noted as the likely eventual shape but rejected for now as premature.
+
+**Reversal triggers:** Entry count exceeds ~20k; query latency becomes user-visible; more than one non-technical contributor needs to edit entries and files prove too hostile.
+
+**Status:** Active
+
+---
+
+## D-002: The app displays official rule text verbatim and never paraphrases it
+
+**Decision:** Anywhere a rule is shown to the user, the app renders the official text exactly, with a citation. Product copy may explain terminology, never restate requirements.
+
+**Context:** Early mockups paraphrased rules into friendly language. A test reader acted on a paraphrase that dropped a qualifying condition. That was the moment "be careful" became insufficient.
+
+**Rationale:** Paraphrasing is where liability lives for a product adjacent to a regulated domain. Verbatim-plus-citation is defensible, checkable in review, and enforceable with a CI heuristic (flag rule-shaped assertions in copy). The rejected alternative, "paraphrase with human review of every string", relies on vigilance rather than structure, and vigilance loses to speed every time. This decision was promoted into hard rule HR-1.
+
+**Reversal triggers:** A qualified domain expert joins and takes ownership of user-facing rule language; or the official source begins publishing plain-language versions that can be shown verbatim instead.
+
+**Status:** Active
+
+---
+
+## D-001: Client-side search over a shipped index
+
+**Decision:** Search runs client-side against a pre-built index shipped with the app.
+
+**Context:** First architecture pass. The prototype called a search API on every keystroke, which meant informal user phrasing (potentially sensitive) transited and could be logged server-side.
+
+**Rationale:** Client-side search meant user queries never leave the device, which simplified the privacy story to "we do not receive it". Beat the server-side option on privacy and offline use, at the cost of index size discipline.
+
+**Reversal triggers:** Index size exceeds what mobile clients can reasonably load; or personalization features require server-side query handling anyway.
+
+**Status:** Superseded (by D-003 discussion and issue #29: index build moved server-side at publish time, queries remain client-side. See D-004 when written.)

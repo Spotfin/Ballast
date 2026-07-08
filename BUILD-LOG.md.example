@@ -1,0 +1,72 @@
+# BUILD-LOG.md (worked example)
+
+A build log is the cheapest guardrail in this whole methodology. One entry per working session, written at the end of the session, in three fixed sections: **Done**, **Deviations**, **Next**.
+
+Why it works:
+
+- **Done** forces an honest accounting. If you cannot state what got finished, nothing got finished.
+- **Deviations** is the drift detector. Anything that happened that the plan did not predict goes here: scope that grew, a shortcut taken, an out-of-scope fix, a surprise. A session with an empty Deviations section and a big diff is a red flag, not a good sign.
+- **Next** makes the following session startable by a cold reader, human or AI. This matters more with an AI collaborator than with a human team, because the AI has no memory of last Tuesday.
+
+Rules of use:
+
+- Newest entry at the top.
+- Write it before you close the session, not from memory the next day.
+- Deviations are logged, not judged. The log is for seeing drift, the decision log is for deciding what to do about it.
+- If a deviation changes the plan, it graduates: update the build guide and add a decision-log entry. The build log entry then just points to those.
+
+The entries below are worked examples from the fictional rulebook-navigator product used throughout this repo.
+
+---
+
+## 2026-03-14
+
+**Done**
+
+- Block 2.3 (search endpoint returns official terminology matches with section citations) merged. All acceptance criteria from the build guide pass, including the empty-results case.
+- Added synthetic fixture set for multi-word informal phrases (14 fixtures).
+
+**Deviations**
+
+- The ranking logic needed a tie-breaker that the build guide did not specify. Chose "most recently validated entry wins" as a provisional rule. This is a real product decision hiding in a technical detail, so it is filed as decision-needed issue #41 rather than settled here.
+- Touched the response serializer, which is Block 2.4 territory, because the citation field did not exist yet. Kept the change to the single field. Noted in the PR description under out-of-scope touches.
+
+**Next**
+
+- Block 2.4: response shaping and the "show official text, never paraphrase" rendering path. Read HR-1 in `guardrails/hard-rules.md` before starting; this block is where that rule lives or dies.
+- Resolve issue #41 before Block 2.5, since ranking behavior is user-visible there.
+
+---
+
+## 2026-03-12
+
+**Done**
+
+- Block 2.2 (informal-phrase normalization) merged.
+- Knowledge base ingest of the second source batch completed under the forum-thread profile. 31 entries added, all at `provisional` confidence.
+
+**Deviations**
+
+- None in code. One process deviation: started Block 2.3 exploration before 2.2 review was finished. Stopped when the review turned up a naming problem that rippled into the 2.3 branch. Lesson noted: parallel blocks are not free even when they look independent.
+
+**Next**
+
+- Address review comments on 2.2 naming.
+- Start Block 2.3 clean after 2.2 merges.
+
+---
+
+## 2026-03-10
+
+**Done**
+
+- Block 2.1 (knowledge base read layer) merged.
+- CI check added: every knowledge base entry file must carry `source` and `confidence` fields, build fails otherwise (see `docs/ci-spec.md` pattern; this is HR-3 as a machine check).
+
+**Deviations**
+
+- The AI proposed generating placeholder provenance for 12 legacy entries to get the new CI check green. Rejected: that would make HR-3 a lie. Instead the 12 entries were moved to a quarantine folder that CI ignores, with a task issue (#37) to re-source them properly. Fail-closed means the check stays strict and the debt stays visible.
+
+**Next**
+
+- Block 2.2. Also re-source the quarantined entries (issue #37) when a low-energy work session comes up.

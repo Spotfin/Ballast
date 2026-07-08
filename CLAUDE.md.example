@@ -1,0 +1,53 @@
+# CLAUDE.md (worked example)
+
+This is a worked example of a workspace-level orientation document for an AI collaborator. It lives at the root of the workspace so the AI reads it at the start of every session. The example product here is a fictional app that translates plain-language questions about a regulated rulebook into the official terminology, backed by a proprietary knowledge base.
+
+Adapt the content, keep the shape. The shape is: what this project is, what the rules are, where things live, how to work, and what to do when unsure.
+
+---
+
+## What this project is
+
+A web app that lets non-experts look up rules from a dense, regulated rulebook using everyday language. The moat is the knowledge base in `knowledge-map/`: a hand-curated mapping between informal phrasing and official terminology, with provenance for every entry. The app itself is deliberately boring; the knowledge base is not.
+
+Two things make this project unusual and both change how you should work:
+
+1. The knowledge base is proprietary. It must never be committed to a public repo, pasted into an issue, or reproduced in generated sample data. Synthetic fixtures only.
+2. The product gives guidance adjacent to a regulated domain. Wrong output is not just a bug, it is a liability. The hard rules below exist because of this.
+
+## Hard rules
+
+Full list with rationale in `guardrails/hard-rules.md`. The short version you must never violate:
+
+- HR-1: The app never asserts what a rule requires. It shows the official text and cites the section. Phrasing that sounds like advice ("you must", "you are allowed to") is a defect, not a style choice.
+- HR-2: No real user-submitted text is ever stored in the knowledge base or used in fixtures. Fixtures are synthetic.
+- HR-3: Every knowledge base entry carries a source reference and a confidence level. An entry without provenance does not get merged.
+- HR-4: If a guardrail check and a feature deadline conflict, the guardrail wins. Do not propose disabling a check to get a PR green.
+
+If a task appears to require breaking one of these, stop and open a `decision-needed` issue instead of proceeding.
+
+## Where things live
+
+- `docs/technical-plan.md`: the settled architecture. Do not relitigate it in a feature PR. If it is wrong, that is a decision-log entry, not a drive-by refactor.
+- `docs/build-guide.md`: the decomposed plan. Every PR maps to exactly one block. If your work does not fit a block, stop.
+- `BUILD-LOG.md`: session log. Update it at the end of every working session, before anything else is considered finished.
+- `DECISION-LOG.md`: decisions with reversal triggers. Read the Active entries before proposing architectural changes.
+- `knowledge-map/`: the knowledge base and the rules for feeding it. Read `knowledge-map/source-profiles.md` before ingesting anything from a new source type.
+
+## How to work
+
+- One block per PR. Scope is defined in the build guide, including what is out of scope. Out-of-scope improvements you notice go in the build log under Deviations or as a new task issue, not into the current diff.
+- Definition of done is in `docs/testing-and-definition-of-done.md`. "The code runs" is not done.
+- When you finish a session: update `BUILD-LOG.md` with Done, Deviations, and Next. Be specific enough that a cold reader could pick up where you left off.
+- Never weaken a test to make it pass. If a test is wrong, say so explicitly and explain why before changing it.
+- Prefer small, reviewable diffs over clever consolidation. The human reviews everything, and review capacity is the bottleneck.
+
+## When unsure
+
+Default to asking, in this order:
+
+1. Is it answered in the technical plan, build guide, or decision log? Use that answer.
+2. Is it a genuinely new decision with tradeoffs? Open a `decision-needed` issue with the options laid out. Do not pick silently.
+3. Is it trivial and reversible? Pick reasonably, note it under Deviations in the build log.
+
+The failure mode this file exists to prevent: an AI that is helpful, fast, and quietly wrong about what matters here. Slow down at the rules, go fast everywhere else.
