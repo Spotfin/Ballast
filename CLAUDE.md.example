@@ -1,0 +1,58 @@
+# CLAUDE.md (worked example)
+
+This is a worked example of a workspace-level orientation document for an AI collaborator. It lives at the root of the workspace so the AI reads it at the start of every session. The example product here is a fictional app that translates plain-language questions about a regulated rulebook into the official terminology, backed by a proprietary knowledge base.
+
+Adapt the content, keep the shape. The shape is: what this project is, what the rules are, where things live, how to work, and what to do when unsure.
+
+One writing rule governs every instruction in this file: **actions, not conditions.** An AI follows explicit action sequences reliably; it does not reliably evaluate a condition before acting. "When X happens, do Y" quietly fails because nothing makes the AI check X. "Do A to check X. If X, do Y" works because the check is itself an action it performs. Every "when", "if", and "once" in your version of this file is a candidate for rewriting into an action step. The instructions below are written this way on purpose; keep that property when you adapt them.
+
+---
+
+## What this project is
+
+A web app that lets non-experts look up rules from a dense, regulated rulebook using everyday language. The moat is the knowledge base in `knowledge-map/`: a hand-curated mapping between informal phrasing and official terminology, with provenance for every entry. The app itself is deliberately boring; the knowledge base is not.
+
+Two things make this project unusual and both change how you should work:
+
+1. The knowledge base is proprietary. It must never be committed to a public repo, pasted into an issue, or reproduced in generated sample data. Synthetic fixtures only.
+2. The product gives guidance adjacent to a regulated domain. Wrong output is not just a bug, it is a liability. The hard rules below exist because of this.
+
+## Hard rules
+
+Full list with rationale in `guardrails/hard-rules.md`. The short version you must never violate:
+
+- HR-1: The app never asserts what a rule requires. It shows the official text and cites the section. Phrasing that sounds like advice ("you must", "you are allowed to") is a defect, not a style choice.
+- HR-2: No real user-submitted text is ever stored in the knowledge base or used in fixtures. Fixtures are synthetic.
+- HR-3: Every knowledge base entry carries a source reference and a confidence level. An entry without provenance does not get merged.
+- HR-4: If a guardrail check and a feature deadline conflict, the guardrail wins. Do not propose disabling a check to get a PR green.
+
+Before starting any block, reread this list and name in the PR description which rules the block touches; write "none" if none. If any step of the work would violate a rule, stop and open a `decision-needed` issue instead of proceeding.
+
+## Where things live
+
+- `docs/technical-plan.md`: the settled architecture. Do not relitigate it in a feature PR. If it is wrong, that is a decision-log entry, not a drive-by refactor.
+- `docs/build-guide.md`: the decomposed plan. Every PR maps to exactly one block. If your work does not fit a block, stop.
+- `BUILD-LOG.md`: session log. Update it at the end of every working session, before anything else is considered finished.
+- `DECISION-LOG.md`: decisions with reversal triggers. Read the Active entries before proposing architectural changes.
+- `knowledge-map/`: the knowledge base and the rules for feeding it. Read `knowledge-map/source-profiles.md` before ingesting anything from a new source type.
+
+## How to work
+
+- Before writing any code, name the build-guide block the work belongs to, and state its scope and out-of-scope lines. If no block fits, stop and say so; either the guide is missing a block or the work should not happen. Out-of-scope improvements you notice go in the build log under Deviations or as a new task issue, not into the current diff.
+- Definition of done is in `docs/testing-and-definition-of-done.md`. Check the work against it before reporting a block finished. "The code runs" is not done.
+- End every session by writing the `BUILD-LOG.md` entry: Done, Deviations, Next. Be specific enough that a cold reader could pick up where you left off. For anything mid-flight, record the state of thinking (what is known, which options remain, where it leans), not just the topic name.
+- Never weaken a test to make it pass. Before changing any existing test, state in the PR what the test asserted, why that was wrong, and what the change asserts instead.
+- Prefer small, reviewable diffs over clever consolidation. The human reviews everything, and review capacity is the bottleneck.
+
+## When unsure
+
+Work through these steps in order. Each step is an action to perform, not a judgment to hold in your head:
+
+1. Search the technical plan, the build guide, and the decision log's Active entries for an answer. If one of them answers it, use that answer and cite it.
+2. List the defensible options. If more than one survives and the choice has consequences beyond this session, open a `decision-needed` issue laying the options out. Do not pick silently.
+3. If only one reasonable option remains, or the choice is trivial and reversible, pick it and record it under Deviations in the build log before the session ends.
+
+The failure mode this file exists to prevent: an AI that is helpful, fast, and quietly wrong about what matters here. Slow down at the rules, go fast everywhere else.
+
+---
+*Ballast v0.1*
