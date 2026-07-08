@@ -58,3 +58,6 @@ Note what the example does: it identifies the acceptance-criteria gap, not just 
 - The severity definitions must be written in terms of *your* product's stakes, not generic P1/P2 language. "Guardrail violation" and "wrong answer" are different tiers here precisely because the worked-example product's harm model says so. Rewrite the tiers from your hard rules.
 - S1 preempting feature work is only real if it has been agreed in advance. That agreement is this template plus your hard rules; deadline-day is too late to negotiate it.
 - The HR-2 reminder inside the reproduction section is an example of a guardrail enforced at the template level: the rule appears exactly where it is most likely to be broken.
+
+---
+*Ballast v0.1*

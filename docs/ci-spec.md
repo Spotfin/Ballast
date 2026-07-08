@@ -48,3 +48,6 @@ A reasonable starting shape, in prose:
 - Every check has an owner comment: which hard rule or decision it enforces, with the ID. A check nobody can explain gets deleted by accident eventually.
 - When a check fires falsely more than rarely, fix the check's precision rather than training yourself to ignore it. An ignored check is worse than no check, because it launders risk as green.
 - New hard rule: same PR adds the rule text and its check, or documents why no check is possible yet and opens a task for it.
+
+---
+*Ballast v0.1*

@@ -38,8 +38,17 @@ Three rules make the ladder real rather than decorative:
 
 Adapt the number of rungs to your domain, but keep the shape: defined criteria per rung, promotion as a reviewed change, and at least one real consequence attached to the levels.
 
+## Scaling: index plus small files
+
+Store the knowledge base as one small file per entry plus an index that describes what exists, rather than as a few large files that grow forever. A monolithic file has to be read in full to find one entry, and with an AI collaborator that cost is paid in context window on every lookup: a five-hundred-entry file bills you its entire length to answer a one-entry question. With an index, a session reads the index, then pulls only the entries it needs, and the cost of a lookup stays flat no matter how large the collection grows.
+
+Two rules make the pattern stick. The index is created when the collection is created, not retroactively once the folder feels big. And the index describes rather than duplicates: one line per entry with its identifier, gist, and confidence level, nothing more. The index also hands CI another cheap fail-closed target: an entry file missing from the index, or an index line pointing at a file that does not exist, fails the build (see `../docs/ci-spec.md`).
+
 ## Why this much structure
 
 Because an AI collaborator makes knowledge-base corruption fast and pleasant. An AI ingesting a source will cheerfully produce fifty well-formatted entries in a minute, each looking exactly as authoritative as a hand-verified one. Without mandatory provenance, typed links, and confidence gating, a month of that produces something that looks like a moat and is actually a landfill with good formatting. The structure is what lets you use the AI's speed for ingestion while keeping the judgment human and auditable.
 
 The companion rule: decide how each source type is handled *before* ingesting anything from it. That is `source-profiles.md`.
+
+---
+*Ballast v0.1*

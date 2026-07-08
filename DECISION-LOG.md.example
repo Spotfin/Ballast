@@ -60,3 +60,6 @@ The entries below are worked examples from the fictional rulebook-navigator prod
 **Reversal triggers:** Index size exceeds what mobile clients can reasonably load; or personalization features require server-side query handling anyway.
 
 **Status:** Superseded (by D-003 discussion and issue #29: index build moved server-side at publish time, queries remain client-side. See D-004 when written.)
+
+---
+*Ballast v0.1*

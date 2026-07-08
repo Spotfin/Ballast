@@ -4,6 +4,8 @@
 
 A guardrail methodology for building IP-protected products with AI, without losing control of the plan.
 
+Version 0.1
+
 ## Who this is for
 
 Solo founders and small teams building a real product with an AI collaborator. "Real" means the product has actual proprietary knowledge, compliance stakes, or both. If you are hacking together a weekend prototype, you do not need this. If you are building something where a leaked data source, a silently skipped rule, or a quietly rewritten plan would genuinely hurt you, you do.
@@ -76,11 +78,24 @@ The documents in this repo share a running example: a fictional small product th
 4. Copy the `.example` files into your workspace, gut the example content, and fill in your own. Keep the section structure. The structure is what was tested, not the words.
 5. Set up the PR and issue templates in your repo's `.github/` folder, adapted to your own guardrails.
 6. Keep the build log and decision log current from day one. They are cheap to maintain and expensive to reconstruct.
+7. Put two freshness lines under the title of every living document you create from these patterns: "Last updated" (the content changed) and "Last reviewed" (you read it and confirmed it still holds). Updating a document and confirming a document are different acts, and recording both is what tells a future reader, human or AI, whether a quiet document is settled or just stale.
+8. Write instructions to the AI as actions, not conditions. "When X, do Y" quietly fails because nothing makes the AI check X; "Do A to check X. If X, do Y" works because the check is itself an action. `CLAUDE.md.example` shows this applied throughout.
 
 ## A note on scale
 
 This methodology assumes one product, one to a few humans, and one or more AI collaborators doing a large share of the implementation. At larger team sizes you likely have process that covers some of this already. The pieces most worth stealing at any scale: hard rules written before features, fail-closed CI as the enforcement layer, and a decision log with reversal triggers.
 
+## Versioning
+
+Ballast is versioned as a whole, and every document carries the current version in its footer. When you adapt this repo, note which version you adapted, so that later you can diff your practice against a newer version instead of re-reading everything and guessing what changed.
+
+## Acknowledgments
+
+Four conventions here (actions-not-conditions instruction writing, evolving-state logging, freshness lines, and the indexed collection pattern) were adapted from [AI Project Architect](https://github.com/vbiroshak/ai-project-architect), a workspace-continuity architecture that complements Ballast's control-side focus well.
+
 ## License
 
 MIT. See [LICENSE](LICENSE).
+
+---
+*Ballast v0.1*

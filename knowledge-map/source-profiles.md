@@ -58,3 +58,6 @@ From the fictional rulebook-navigator product, whose knowledge base maps informa
 - The last profile is the one people skip and should not. The founder's own knowledge is usually the first thing ingested and the least documented, and six months later nobody can tell which entries were verified and which were remembered.
 - Profiles are versioned documents. When a profile changes, existing source records keep the profile version they were ingested under, so an audit can always reconstruct what rules applied.
 - A new source type with no profile means ingestion stops until the profile is written. That rule belongs in your hard rules or your CLAUDE.md, stated exactly that bluntly, because the tempting moment ("just this one podcast") is precisely when it applies.
+
+---
+*Ballast v0.1*

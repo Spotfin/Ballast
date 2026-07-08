@@ -62,3 +62,6 @@ Modified tests:
 - Keep the guardrail items in one-to-one correspondence with your numbered hard rules, and keep the numbers visible. The template is one of the main places rule numbers stay alive.
 - The last item under Records is the subtle one. PRs are where undeclared decisions hide: a tie-breaker chosen ad hoc, a default that becomes permanent. The checklist item exists to make the author ask "did I just decide something?" once per PR.
 - Resist adding items. Every item you add makes every previous item slightly less read. If an item has been N/A on twenty consecutive PRs, consider whether it belongs in the template at all or only in the blocks flagged for it.
+
+---
+*Ballast v0.1*

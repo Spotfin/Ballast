@@ -57,3 +57,6 @@ Block: ___
 - The "does this actually matter" test sounds rude and is the most valuable part of the template. Small teams with an AI collaborator generate task ideas faster than any team in history; the AI will happily propose ten plausible improvements per session. Most fail this test, and it is far cheaper to fail them at filing than to triage them forever. An honest "nothing breaks, nobody notices" answer is a gift: close it.
 - The block linkage keeps the task backlog and the build guide from becoming two competing plans. If a task does not fit any block and still matters, the plan is missing something: fix the plan, then file the task.
 - The size question's third option is a tripwire. Multi-session work managed as a loose task is how blobs of unreviewable work come back. It should graduate to a block with real scope and acceptance criteria.
+
+---
+*Ballast v0.1*

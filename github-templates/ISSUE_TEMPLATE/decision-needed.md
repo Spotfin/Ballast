@@ -41,6 +41,10 @@ labels: decision-needed
 
 <!-- Cite by number: HR-2, D-003. "None" is a valid answer but say it explicitly. -->
 
+## Where thinking stands
+
+<!-- Keep this section current as discussion progresses; it is the issue's living state, while the comments below are its history. Capture: what has been gathered so far, which options have been eliminated and why, where thinking currently leans, and what specifically remains before this can resolve. An issue that ends a session "still open" with this section filled lets the next session continue; an empty one makes the next session start over from the options list. -->
+
 ## Recommendation (optional)
 
 <!-- The filer may recommend, and must still not implement before resolution. -->
@@ -55,4 +59,8 @@ labels: decision-needed
 
 - The "which rules are in play" section is what makes this template different from a generic discussion issue. It forces the connection to the standing rules to be checked at filing time, when context is fresh, not at resolution time from memory.
 - An AI collaborator should be instructed (in your CLAUDE.md) to file these instead of choosing when it hits a genuine fork. In practice this is one of the highest-value behaviors to establish: the cost of a filed issue is minutes, the cost of a silently embedded decision is finding it six weeks later, load-bearing.
+- Decisions rarely resolve in one sitting. The "where thinking stands" section exists so an unresolved issue carries its partial progress forward instead of resetting to a bare options list every time someone picks it up. Update it at the end of any session that touched the decision, the same way the build log gets its entry.
 - Watch for decision-needed issues that sit open while the default quietly ships anyway. That is the process failing politely. If an issue blocks nothing for two weeks, either decide it or explicitly log "deferred, default stands until trigger X" in the decision log.
+
+---
+*Ballast v0.1*

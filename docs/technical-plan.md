@@ -28,6 +28,8 @@ Once the plan is settled, it changes only through the decision log. A change to 
 
 The corollary for the AI collaborator, worth stating verbatim in your CLAUDE.md: do not relitigate the technical plan inside a feature PR. If the plan seems wrong, that is a decision-needed issue, not a refactor.
 
+Give the plan two freshness lines under its title: "Last updated" (content changed) and "Last reviewed" (read and confirmed still true). Updating and confirming are different acts. A plan nobody has reviewed in three months is not settled, it is unexamined, and the gap between the two dates is what tells you which one you have.
+
 ## Worked example (abridged)
 
 An abridged technical plan for the fictional rulebook-navigator product used throughout this repo:
@@ -47,3 +49,6 @@ Notice what the example does: every architectural choice is traceable to either 
 - Feature PRs stop containing architecture arguments.
 - New sessions with the AI start from "read the technical plan" instead of a fresh explanation.
 - When the architecture does change, you can point to the day, the reason, and the trigger that was hit.
+
+---
+*Ballast v0.1*

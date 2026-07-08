@@ -60,3 +60,7 @@ Notice the pattern in the acceptance criteria: the ones that matter most are res
 - When a block's scope changes mid-flight, edit the guide in the same PR and say so in the build log under Deviations.
 - When a whole milestone reshuffles, that is usually a decision-log entry.
 - Completed blocks stay in the document, marked done. The guide doubles as a history of what the plan actually was, which is worth more than a clean-looking document.
+- The guide carries "Last updated" and "Last reviewed" lines under its title. Rereading it at the start of each milestone and refreshing the reviewed date is a cheap habit, and it is the difference between a guide that describes the build and one that quietly became fiction.
+
+---
+*Ballast v0.1*

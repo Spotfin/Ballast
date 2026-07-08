@@ -38,3 +38,6 @@ For any completion claim from the AI that touches Tier 1 or Tier 2, the review i
 ## What this is not
 
 This is not a testing tutorial and deliberately says nothing about frameworks or coverage percentages. Those choices are yours. The pattern is only: define done in writing, weight testing toward guardrails and IP, and never accept a completion report as a completion.
+
+---
+*Ballast v0.1*

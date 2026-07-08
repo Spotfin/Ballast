@@ -50,4 +50,7 @@ Note the shape: each rule is one behavioral sentence plus one rationale sentence
 
 - Every rule gets a number, and the numbers are used everywhere: PR checklists, build-guide flags, CI check comments, decision-log entries. A rule that is never cited is either universally internalized or universally ignored, and it is worth finding out which.
 - Rules change through the decision log only, like the technical plan. Adding a rule is cheap. Removing or weakening one requires a decision entry with reversal triggers, which is deliberately heavy.
-- Once per milestone, reread the list against the product as it actually exists. The dangerous drift is not a violated rule, it is a rule that quietly stopped describing anything real.
+- Once per milestone, reread the list against the product as it actually exists. The dangerous drift is not a violated rule, it is a rule that quietly stopped describing anything real. Record the reread by refreshing the file's "Last reviewed" freshness line (keep "Last updated" for content changes); the gap between those two dates is your drift meter.
+
+---
+*Ballast v0.1*

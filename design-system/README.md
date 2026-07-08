@@ -37,3 +37,6 @@ Note the shape of the worked example: the rule is derived from a *specific audie
 - The rule gets an ID (DS-1) and appears in the PR checklist for any UI-touching block, same N/A-with-reason mechanics as the hard rules.
 - Parts are mechanically checkable: minimum sizes and contrast can be linted or tested. Do it where cheap, per `../docs/ci-spec.md`, fail closed.
 - Exceptions go through the decision log. If exceptions become frequent, the rule is either wrong (fix it deliberately) or the product is drifting from its audience (worth knowing early, and this is how you find out).
+
+---
+*Ballast v0.1*

@@ -6,7 +6,7 @@ Why it works:
 
 - **Done** forces an honest accounting. If you cannot state what got finished, nothing got finished.
 - **Deviations** is the drift detector. Anything that happened that the plan did not predict goes here: scope that grew, a shortcut taken, an out-of-scope fix, a surprise. A session with an empty Deviations section and a big diff is a red flag, not a good sign.
-- **Next** makes the following session startable by a cold reader, human or AI. This matters more with an AI collaborator than with a human team, because the AI has no memory of last Tuesday.
+- **Next** makes the following session startable by a cold reader, human or AI. This matters more with an AI collaborator than with a human team, because the AI has no memory of last Tuesday. For anything unresolved, capture the state of thinking, not the binary fact that it is open: what was gathered, which options are on the table, where thinking currently leans, and what specifically remains. "Ranking still open" restarts that discussion from zero next session; the 2026-03-14 entry below shows the alternative.
 
 Rules of use:
 
@@ -34,7 +34,7 @@ The entries below are worked examples from the fictional rulebook-navigator prod
 **Next**
 
 - Block 2.4: response shaping and the "show official text, never paraphrase" rendering path. Read HR-1 in `guardrails/hard-rules.md` before starting; this block is where that rule lives or dies.
-- Resolve issue #41 before Block 2.5, since ranking behavior is user-visible there.
+- Resolve issue #41 before Block 2.5, since ranking behavior is user-visible there. State of thinking: leaning toward "most recently validated entry wins"; the open concern is ordering stability when the index is republished; not yet examined is whether ties are even frequent enough for users to notice.
 
 ---
 
@@ -70,3 +70,6 @@ The entries below are worked examples from the fictional rulebook-navigator prod
 **Next**
 
 - Block 2.2. Also re-source the quarantined entries (issue #37) when a low-energy work session comes up.
+
+---
+*Ballast v0.1*

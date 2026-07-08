@@ -4,6 +4,8 @@ This is a worked example of a workspace-level orientation document for an AI col
 
 Adapt the content, keep the shape. The shape is: what this project is, what the rules are, where things live, how to work, and what to do when unsure.
 
+One writing rule governs every instruction in this file: **actions, not conditions.** An AI follows explicit action sequences reliably; it does not reliably evaluate a condition before acting. "When X happens, do Y" quietly fails because nothing makes the AI check X. "Do A to check X. If X, do Y" works because the check is itself an action it performs. Every "when", "if", and "once" in your version of this file is a candidate for rewriting into an action step. The instructions below are written this way on purpose; keep that property when you adapt them.
+
 ---
 
 ## What this project is
@@ -24,7 +26,7 @@ Full list with rationale in `guardrails/hard-rules.md`. The short version you mu
 - HR-3: Every knowledge base entry carries a source reference and a confidence level. An entry without provenance does not get merged.
 - HR-4: If a guardrail check and a feature deadline conflict, the guardrail wins. Do not propose disabling a check to get a PR green.
 
-If a task appears to require breaking one of these, stop and open a `decision-needed` issue instead of proceeding.
+Before starting any block, reread this list and name in the PR description which rules the block touches; write "none" if none. If any step of the work would violate a rule, stop and open a `decision-needed` issue instead of proceeding.
 
 ## Where things live
 
@@ -36,18 +38,21 @@ If a task appears to require breaking one of these, stop and open a `decision-ne
 
 ## How to work
 
-- One block per PR. Scope is defined in the build guide, including what is out of scope. Out-of-scope improvements you notice go in the build log under Deviations or as a new task issue, not into the current diff.
-- Definition of done is in `docs/testing-and-definition-of-done.md`. "The code runs" is not done.
-- When you finish a session: update `BUILD-LOG.md` with Done, Deviations, and Next. Be specific enough that a cold reader could pick up where you left off.
-- Never weaken a test to make it pass. If a test is wrong, say so explicitly and explain why before changing it.
+- Before writing any code, name the build-guide block the work belongs to, and state its scope and out-of-scope lines. If no block fits, stop and say so; either the guide is missing a block or the work should not happen. Out-of-scope improvements you notice go in the build log under Deviations or as a new task issue, not into the current diff.
+- Definition of done is in `docs/testing-and-definition-of-done.md`. Check the work against it before reporting a block finished. "The code runs" is not done.
+- End every session by writing the `BUILD-LOG.md` entry: Done, Deviations, Next. Be specific enough that a cold reader could pick up where you left off. For anything mid-flight, record the state of thinking (what is known, which options remain, where it leans), not just the topic name.
+- Never weaken a test to make it pass. Before changing any existing test, state in the PR what the test asserted, why that was wrong, and what the change asserts instead.
 - Prefer small, reviewable diffs over clever consolidation. The human reviews everything, and review capacity is the bottleneck.
 
 ## When unsure
 
-Default to asking, in this order:
+Work through these steps in order. Each step is an action to perform, not a judgment to hold in your head:
 
-1. Is it answered in the technical plan, build guide, or decision log? Use that answer.
-2. Is it a genuinely new decision with tradeoffs? Open a `decision-needed` issue with the options laid out. Do not pick silently.
-3. Is it trivial and reversible? Pick reasonably, note it under Deviations in the build log.
+1. Search the technical plan, the build guide, and the decision log's Active entries for an answer. If one of them answers it, use that answer and cite it.
+2. List the defensible options. If more than one survives and the choice has consequences beyond this session, open a `decision-needed` issue laying the options out. Do not pick silently.
+3. If only one reasonable option remains, or the choice is trivial and reversible, pick it and record it under Deviations in the build log before the session ends.
 
 The failure mode this file exists to prevent: an AI that is helpful, fast, and quietly wrong about what matters here. Slow down at the rules, go fast everywhere else.
+
+---
+*Ballast v0.1*
