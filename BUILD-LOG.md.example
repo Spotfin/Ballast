@@ -14,6 +14,7 @@ Rules of use:
 - Write it before you close the session, not from memory the next day.
 - Deviations are logged, not judged. The log is for seeing drift, the decision log is for deciding what to do about it.
 - If a deviation changes the plan, it graduates: update the build guide and add a decision-log entry. The build log entry then just points to those.
+- The build log has a retirement plan. When the primary build ships and a day's work fragments into many small units across lanes, the session-essay format stops earning its cost. It retires into a one-line-per-unit ledger; see `LEDGER.md.example` for the successor format, the signals that it is time, and the transition mechanics.
 
 The entries below are worked examples from the fictional rulebook-navigator product used throughout this repo.
 

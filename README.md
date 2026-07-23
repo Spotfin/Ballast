@@ -32,6 +32,7 @@ Fast AI builds fail in predictable ways: the plan drifts, decisions evaporate, r
 | Guardrails exist only as intentions | `docs/ci-spec.md`, `guardrails/hard-rules.md` |
 | The AI forgets what project it is in | `CLAUDE.md.example` |
 | Progress and drift become invisible | `BUILD-LOG.md.example` |
+| The record stops being kept once the build ships | `LEDGER.md.example` |
 | Decisions get remade, badly, from memory | `DECISION-LOG.md.example` |
 | Review becomes a rubber stamp | `github-templates/` |
 | Proprietary knowledge scatters or leaks | `knowledge-map/` |
@@ -45,6 +46,7 @@ Ballast/
 ├── LICENSE                      MIT
 ├── CLAUDE.md.example            Workspace-level agent orientation doc, worked example
 ├── BUILD-LOG.md.example         Done / Deviations / Next session log, worked example
+├── LEDGER.md.example            What the build log becomes after the build ships
 ├── DECISION-LOG.md.example      Decision record format, worked example
 ├── docs/
 │   ├── technical-plan.md        Settle architecture once, separately from execution

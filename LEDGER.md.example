@@ -1,0 +1,76 @@
+# LEDGER.md (worked example)
+
+The ledger is what the build log becomes when the primary build ships.
+
+During the heavy build, the session recap earns its length. One block per session, three fixed sections, and the Deviations section doing real drift-detection work: that format fits a phase where each session advances one reviewable block of a plan. But the phase ends. The product ships, and the shape of work changes underneath the log. A day now holds a dozen small units across different lanes: a knowledge base ingest here, a CI fix there, an issue triage pass, a registry repair, an ops errand. Writing a three-section essay about a day like that is expensive enough that it quietly stops happening, and a log that stops happening protects nothing. Worse, the essays that do get written blur together, because "the session" is no longer a meaningful unit of work.
+
+The ledger keeps the one job no other artifact does, the cheap chronological record of what happened when, and sheds everything else. One line per unit of work: local time, one sentence or the verbatim prompt that started it, a link.
+
+Why it works:
+
+- **A line is cheap enough to actually get written.** The build log's essay format survives on discipline; the ledger's format survives on being nearly free. A record that is 90 percent complete because it costs nothing beats a richer format at 40 percent.
+- **The verbatim-prompt trick.** With an AI collaborator, the prompt that started a unit of work is often the best one-line summary of it. "Go through the open issues, I think some are already completed or are old and stale" tells a future reader the intent, the scope, and the voice of the moment better than a paraphrase would. When the prompt is short and says it all, record it verbatim.
+- **Chronology is a recovery tool.** Two real incidents, genericized: a deliverable everyone believed lost was recovered because a log line recorded which branch had carried it; and a pair of merges that GitHub reported as merged but that never actually reached main were caught by reading the record against the repo. Boards and issue trackers hold current state; only a chronological record can answer "what happened on the 12th, in what order?"
+
+## The split that makes one line enough
+
+A build-log entry carried three jobs. The ledger sheds two of them to artifacts that, by this phase, exist:
+
+| Build-log section | Where it lives now |
+|---|---|
+| **Done** | The ledger line itself, plus the PR link that carries the detail |
+| **Deviations** that change how you work | The decision log, as a proper entry |
+| **Next** | The issue tracker or project board, which owns operational state |
+
+Build plans stay in their planning docs; the next big phase resumes from its build guide, not from the log. If those homes do not exist yet in your project, you are still in the build phase. Keep the build log; the ledger is for after.
+
+## Rules of use
+
+- Newest day first; within a day, lines in order.
+- A line is: local time, then one sentence (or the verbatim prompt when it is short and says it all), then a link to the PR, issue, or artifact.
+- Lines, not paragraphs. If a line wants to become a paragraph, what it wants to say belongs in a PR description, a decision-log entry, or an issue comment. Write it there and link it.
+- Any session that did anything appends its lines at session end. Not just build sessions; the triage afternoon and the ops errand belong here too.
+- While a PR is open its line stays a slim pointer; update the line when it merges, so the ledger never claims more than the repo holds.
+- If main is protected, lines accrue locally and batch-land by PR when the day feels done. The ledger is the one artifact where batching is fine; nothing downstream consumes it in real time.
+
+## The transition, mechanically
+
+- Rename the file in place (`git mv BUILD-LOG.md LEDGER.md`). One file, one history, one place to grep.
+- Freeze the entire build-log era verbatim under an archive divider with a "do not append here" note. The old entries are part of the record; they just stop growing.
+- State the charter in the file header, including what does *not* go in the ledger. The exclusions are what keep the lines short.
+- Update the workspace orientation doc (your CLAUDE.md equivalent) in the same change, so the next session, human or AI, learns the new rule from the source it already reads.
+
+When to switch, the honest signals: the primary build is merged and shipped; you find yourself resuming big work from planning docs rather than from the log; log entries have turned into multi-topic essays; a single day's work routinely spans lanes or repos. When in doubt, keep the build log. Retiring it early costs you your drift detector.
+
+The example below continues the fictional rulebook-navigator product used throughout this repo, a few weeks after its v1 shipped.
+
+---
+
+# Ledger
+
+*Running record of everything done in this workspace, newest day first. One line per unit of work: local time, then one sentence, or the verbatim prompt when it is short and says it all. Link the PR, issue, or artifact when one exists. Lines, not paragraphs. Formerly BUILD-LOG.md; the build-era entries are archived at the bottom.*
+
+*Not here: decisions and their rationale (DECISION-LOG.md), operational state and next actions (the project board), build plans (docs/; phase 2 resumes from docs/build-guide-phase-2.md).*
+
+## 2026-05-09
+
+- 09:10 Prompt: "go through the open issues, I think some are already done or stale." All 21 triaged with per-claim verification against the current tree; two closed with evidence comments, one folder retirement proposed.
+- 10:40 Doc sweep closing nine stale-doc findings in one pass (#84), stacked on the folder retirement (#83).
+- 13:05 Second forum-source batch ingested through the approval loop: 4 entries, 11 links (#85). Validator clean.
+- 15:30 Caught a registry race: two quick merges published out of order and the dist-tag pointed at the older version; the publish workflow now serializes runs and asserts the tag (#86).
+
+## 2026-05-08
+
+- 11:00 Knowledge base snapshot v0.9 frozen; growth curve updated.
+- 16:20 Prompt: "invite codes for the beta gate." Mechanism contract settled and recorded on issue #52; builds as its own block next session.
+
+---
+
+# Archive: the build era (2026-02-01 to 2026-05-07)
+
+*Frozen at the repurpose. Do not append here; new lines go in the ledger above.*
+
+*(The Done / Deviations / Next entries from BUILD-LOG.md continue below, verbatim and unchanged. See BUILD-LOG.md.example for that format.)*
+
+---
+*Ballast v0.1*
